@@ -1,0 +1,88 @@
+SRP means class should only handle responsibility for which it got created.
+
+eg : 
+Consider "ImageViewer" class, which should handle responsibility of diplaying the images.
+
+Without applying SRP : below class is performing other activities than simply displaying image, which is violating SRP principle
+
+class ImageViewer
+    {
+        public void Display()
+        {
+            CreateObject();
+            ReadXmlTemplate();
+            CreateXML();
+            LogXmlParameter();
+            DisplayImage();
+        }
+
+        private void DisplayImage()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void LogXmlParameter()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CreateXML()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ReadXmlTemplate()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CreateObject()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+After applying SRP: Responibilities are moved to rspective classes.
+
+ public class FileOperations
+    {
+        public static void ReadXmlTemplate(string fileName)
+        {
+        }
+    }
+
+ public class ImageObjectBuilder
+    { 
+        public static void CreateObject()
+        {
+        }
+    }
+
+  public class ImageViewer
+    {
+        public void Display()
+        {          
+            DisplayImage();
+        }
+
+        private void DisplayImage()
+        {
+        }
+       
+    }
+
+ public class Logger
+    {
+        public static void LogXmlParameter(string message)
+        {
+        }
+
+    }
+
+ public class XmlGenerator
+    {
+        public static void CreateXML()
+        {
+        }
+    }
+
